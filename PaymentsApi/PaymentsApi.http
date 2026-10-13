@@ -4,3 +4,20 @@ GET {{PaymentsApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{PaymentsApi_HostAddress}}/payments/
+Accept: application/json
+
+###
+GET {{PaymentsApi_HostAddress}}/payments/2
+Accept: application/json
+
+###
+
+POST {{PaymentsApi_HostAddress}}/payments/
+Content-Type: application/json
+
+{
+    "Amount" : "21.99",
+    "Currency" : "usd", 
+    "Status": "Start"
+}
