@@ -13,8 +13,9 @@ public class PaymentServices
     {
         payment_example = new List<Payment>
             {
-                new Payment { Id = 1, Amount = 10.99M, Currency="usd", Status="Start", CreatedAt = DateTime.Now },
-                new Payment { Id = 2, Amount = 12.99M, Currency="usd", Status="Start", CreatedAt = DateTime.Now }
+                new Payment { Id = 1, Amount = 10.99M, Currency="usd", Status = Payment.Stat.Completed, CreatedAt = DateTime.Now },
+                new Payment { Id = 2, Amount = 12.99M, Currency="usd", Status = Payment.Stat.Pending, CreatedAt = DateTime.Now },
+                new Payment { Id = 3, Amount = 5.50M,  Currency="usd", Status = Payment.Stat.Pending ,CreatedAt=DateTime.Now}
             };
     }
 
@@ -27,6 +28,7 @@ public class PaymentServices
     public static void Add(Payment incomingPayment)
     {
         incomingPayment.Id = nextId++;
+        incomingPayment.Status= Payment.Stat.Pending;
         payment_example.Add(incomingPayment);
     }
 }

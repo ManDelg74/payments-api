@@ -8,7 +8,7 @@ GET {{PaymentsApi_HostAddress}}/payments/
 Accept: application/json
 
 ###
-GET {{PaymentsApi_HostAddress}}/payments/2
+GET {{PaymentsApi_HostAddress}}/payments/1
 Accept: application/json
 
 ###
@@ -18,6 +18,5 @@ Content-Type: application/json
 
 {
     "Amount" : "21.99",
-    "Currency" : "usd", 
-    "Status": "Start"
+    "Currency" : "usd" 
 }

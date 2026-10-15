@@ -13,9 +13,16 @@ public class Payment
     [Required(ErrorMessage ="Currency is required")]
     [StringLength(3,MinimumLength =3, ErrorMessage = "Currency must be 3 characters")]
     public string? Currency { get; set; }
-    [Required(ErrorMessage ="Status is required")]    
-    [StringLength(10,MinimumLength =1,  ErrorMessage = "Status must exist")]
-    public string? Status { get; set; }
+
+    public Stat Status   {get;set;}
+    public enum Stat
+    {
+        Pending, 
+        Completed, 
+        Failed
+    };
+
+    
     public DateTime CreatedAt { get; set; }
 
 

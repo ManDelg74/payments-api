@@ -43,7 +43,7 @@ namespace PaymentsApi.Controllers
             return CreatedAtAction(nameof(Get), new {Id = incomingPayment.Id, 
             Amount = incomingPayment.Amount, 
             Currency= incomingPayment.Currency,
-            Status =    incomingPayment.Status, 
+            Status =   incomingPayment.Status, 
             CreatedAt = DateTime.Now }, incomingPayment);
 
         }
