@@ -20,3 +20,11 @@ Content-Type: application/json
     "Amount" : "21.99",
     "Currency" : "usd" 
 }
+
+POST {{PaymentsApi_HostAddress}}/payments/
+Content-Type: application/json
+
+{
+    "Amount" : "21.99",
+    "Currency" : "us" 
+}

@@ -13,3 +13,37 @@ POST {{PaymentsApi_HostAddress}}/payments/ --to submit a payment(include the exp
     Amount must be between $ 1-60
     Currency must be exactly 3 strings
     Status must exist and be between 1-10 characters
+
+# examples to run
+GET http://localhost:5245/payments/
+Accept: application/json
+
+expected code: 200(and all results returned in JSON)
+
+###
+GET http://localhost:5245/payments/1
+Accept: application/json
+
+expected code: 200(only a single result set returned in json)
+
+
+###
+
+POST http://localhost:5245/payments/
+Content-Type: application/json
+
+{
+    "Amount" : "21.99",
+    "Currency" : "usd" 
+}
+
+expected code: 201(results returned to show what was inserted)
+
+POST {{PaymentsApi_HostAddress}}/payments/
+Content-Type: application/json
+
+{
+    "Amount" : "21.99",
+    "Currency" : "us" 
+}
+expected code: 400(results returned "Currency must be 3 characters")
