@@ -11,23 +11,25 @@ namespace PaymentsApi.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        public PaymentsController()
-        {            
+        private readonly IPaymentServices _paymentServices;
+        public PaymentsController(IPaymentServices paymentServices)
+        {
+            _paymentServices = paymentServices;
         }        
 
         //#GET /payments, 
         // GET all action
         [HttpGet]
-        public ActionResult<List<Payment>> GetAll() =>
-        PaymentServices.GetAll();
+        public ActionResult<List<Payment>> GetAll() => _paymentServices.GetAll();
 
 
         //GET /payments/{id}, 
         [HttpGet("{id}")]
-        public ActionResult<Payment> Get(int id){
-            var tempPayment = PaymentServices.Get(id);
+        public ActionResult<Payment> GET(int id){
 
-            if (tempPayment ==null)
+            Payment? tempPayment = _paymentServices.GET(id);
+
+            if (tempPayment == null)
             {
                 return NotFound();
             }
@@ -39,8 +41,8 @@ namespace PaymentsApi.Controllers
         [HttpPost]
         public IActionResult CREATE(Payment incomingPayment)
 {
-            PaymentServices.Add(incomingPayment);
-            return CreatedAtAction(nameof(Get), new {Id = incomingPayment.Id, 
+            _paymentServices.Add(incomingPayment);
+            return CreatedAtAction(nameof(GET), new {Id = incomingPayment.Id, 
             Amount = incomingPayment.Amount, 
             Currency= incomingPayment.Currency,
             Status =   incomingPayment.Status, 

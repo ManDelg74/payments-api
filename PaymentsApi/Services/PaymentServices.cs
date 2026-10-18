@@ -4,7 +4,7 @@ using PaymentsApi.Model;
 
 namespace PaymentsApi.Services;
 
-public class PaymentServices
+public class PaymentServices : IPaymentServices
 {
     // fake data
     static List<Payment> payment_example { get; }
@@ -19,16 +19,37 @@ public class PaymentServices
             };
     }
 
-    static int nextId = 3;
+    int nextId = 3;
 
-    public static List<Payment> GetAll() => payment_example;
-
-    public static Payment? Get(int id) => payment_example.FirstOrDefault(p => p.Id == id);
-
-    public static void Add(Payment incomingPayment)
+    //public static List<Payment> GetAll() => payment_example;
+    public List<Payment> GetAll()
     {
-        incomingPayment.Id = nextId++;
-        incomingPayment.Status= Payment.PaymentStatus.Pending;
-        payment_example.Add(incomingPayment);
+        var tempPayments = payment_example;
+        return tempPayments;
     }
+    
+    //public static Payment? Get(int id) => payment_example.FirstOrDefault(p => p.Id == id);
+     public Payment? GET(int id)
+     {
+         Payment? tempSinglePayment = payment_example.FirstOrDefault(p => p.Id == id);
+
+         return tempSinglePayment;
+     }
+    // public static void Add(Payment incomingPayment)
+    // {
+    //     incomingPayment.Id = nextId++;
+    //     incomingPayment.Status= Payment.PaymentStatus.Pending;
+    //     payment_example.Add(incomingPayment);
+    // }
+
+     Payment IPaymentServices.Add(Payment incomingPayment)
+     {
+         var tempIncomingPayment = incomingPayment;
+
+         tempIncomingPayment.Id = ++nextId;
+         tempIncomingPayment.Status= Payment.PaymentStatus.Pending;
+         tempIncomingPayment.CreatedAt=DateTime.Now;
+         payment_example.Add(tempIncomingPayment);
+         return tempIncomingPayment;
+     }
 }
